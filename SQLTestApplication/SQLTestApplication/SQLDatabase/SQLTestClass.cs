@@ -59,10 +59,11 @@ namespace SQLTestApplication.SQLDatabase
             SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
             for (int i=0;i< rows; i++) { 
-                string query = "INSERT INTO test(Name,NeptunCode) VALUES (@Name,@NeptunCode)";
+                string query = "INSERT INTO test(ID,Name,NeptunCode) VALUES (@ID,@Name,@NeptunCode)";
                 SqlDataAdapterObject.InsertCommand = new SqlCommand(query, SqlConnectionObject);
+                SqlDataAdapterObject.InsertCommand.Parameters.Add("@ID", SqlDbType.Int).Value = i;
                 SqlDataAdapterObject.InsertCommand.Parameters.Add("@Name", SqlDbType.VarChar, 30).Value = "testUser"+i;
-                SqlDataAdapterObject.InsertCommand.Parameters.Add("@NeptunCode", SqlDbType.VarChar, 30).Value = "B"+i;
+                SqlDataAdapterObject.InsertCommand.Parameters.Add("@NeptunCode", SqlDbType.VarChar, 6).Value = "B"+i;
                 SqlDataAdapterObject.InsertCommand.ExecuteNonQuery();
             }
             //------------------------------------------------------------------------------------------------------------
