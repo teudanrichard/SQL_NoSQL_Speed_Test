@@ -63,12 +63,14 @@
     <Compile Include="Exceptions\MissingParameterException.cs" />
     <Compile Include="Exceptions\MSSQLException.cs" />
     <Compile Include="Exceptions\MySQLInnoDBException.cs" />
+    <Compile Include="Exceptions\MySQLMyISAMDBException.cs" />
     <Compile Include="Exceptions\NoSQLException.cs" />
     <Compile Include="NoSQLDatabase\NoSQLTestClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLDatabase\MSSQLTestClass.cs" />
     <Compile Include="SQLDatabase\MySQLInnoDB.cs" />
+    <Compile Include="SQLDatabase\MySQLMyISAM.cs" />
     <Compile Include="Statistic\DataObject.cs" />
     <Compile Include="Statistic\Types.cs" />
     <Compile Include="Statistic\ExecutionTime.cs" />

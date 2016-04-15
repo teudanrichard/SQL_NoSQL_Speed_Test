@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQLtestisamApplication.SQLDatabase
+namespace SQLTestApplication.SQLDatabase
 {
     public class MySQLMyISAM
     {

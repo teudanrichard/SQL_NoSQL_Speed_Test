@@ -34,7 +34,7 @@ namespace SQLTestApplication
                 noSQL.deleteAllRows();
                 msSQL.deleteAllRows();
                 mySQLInnoDB.deleteAllRows();
-                msSQL.deleteAllRows();
+                mySQLMyISAM.deleteAllRows();
             }
             catch(NoSQLException ex)
             {
@@ -53,27 +53,27 @@ namespace SQLTestApplication
             #endregion
             #region Teszt ciklus
             //teszt kezdete
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 100; i++) {
                 try { 
-                    stats.Add(noSQL.insertRows(50));
+                    stats.Add(noSQL.insertRows(1));
                     stats.Add(noSQL.selectAllRows().Result);
-                    stats.Add(noSQL.updateRows(50).Result);
+                    stats.Add(noSQL.updateRows(1).Result);
                     stats.Add(noSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(msSQL.insertRows(50));
+                    stats.Add(msSQL.insertRows(1));
                     stats.Add(msSQL.selectAllRows());
-                    stats.Add(msSQL.updateRows(50));
+                    stats.Add(msSQL.updateRows(1));
                     stats.Add(msSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(mySQLInnoDB.insertRows(50));
+                    stats.Add(mySQLInnoDB.insertRows(1));
                     stats.Add(mySQLInnoDB.selectAllRows());
-                    stats.Add(mySQLInnoDB.updateRows(50));
+                    stats.Add(mySQLInnoDB.updateRows(1));
                     stats.Add(mySQLInnoDB.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(.insertRows(50));
-                    stats.Add(mySQLInnoDB.selectAllRows());
-                    stats.Add(mySQLInnoDB.updateRows(50));
-                    stats.Add(mySQLInnoDB.deleteAllRows());
+                    stats.Add(mySQLMyISAM.insertRows(1));
+                    stats.Add(mySQLMyISAM.selectAllRows());
+                    stats.Add(mySQLMyISAM.updateRows(1));
+                    stats.Add(mySQLMyISAM.deleteAllRows());
                 }
                 catch(MSSQLException ex)
                 {
@@ -87,6 +87,12 @@ namespace SQLTestApplication
                 catch (MySQLInnoDBException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    break;
+                }
+                catch (MySQLMyISAMDBException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    break;
                 }
                 catch (Exception ex) { 
                     Console.WriteLine(ex.Message);
@@ -95,25 +101,45 @@ namespace SQLTestApplication
             }
             #endregion
             #region Adatok kiértékelése
-            double mind = stats[0].Time.getExecutionTime(),
-                   maxd = stats[0].Time.getExecutionTime(),
-                   minNoSQL = stats[0].Time.getExecutionTime(),
-                   maxNoSQL = stats[0].Time.getExecutionTime(),
-                   minMSSQL = stats[4].Time.getExecutionTime(),
-                   maxMSSQL = stats[4].Time.getExecutionTime(),
-                   minMySQLInnoDB = stats[8].Time.getExecutionTime(),
-                   maxMySQLInnoDB = stats[8].Time.getExecutionTime();
+            double mind = -1,
+                   maxd = 1,
+                   minNoSQL = -1,
+                   maxNoSQL = 1,
+                   minMSSQL = -1,
+                   maxMSSQL = 1,
+                   minMySQLInnoDB = -1,
+                   maxMySQLInnoDB = 1,
+                   minMySQLMyISAM = -1,
+                   maxMySQLMyISAM = 1;
 
-            SQLStatistic mins = stats[0],
-                         maxs = stats[0],
-                         mindexNoSQL = mins,
-                         maxdexNoSQL = maxs,
-                         mindexMSSQL = stats[4],
-                         maxdexMSSQL = stats[4],
+            try {
+                mind = stats[0].Time.getExecutionTime();
+                maxd           = stats[0].Time.getExecutionTime();
+                minNoSQL       = stats[0].Time.getExecutionTime();
+                maxNoSQL       = stats[0].Time.getExecutionTime();
+                minMSSQL       = stats[4].Time.getExecutionTime();
+                maxMSSQL       = stats[4].Time.getExecutionTime();
+                minMySQLInnoDB = stats[8].Time.getExecutionTime();
+                maxMySQLInnoDB = stats[8].Time.getExecutionTime();
+                minMySQLMyISAM = stats[12].Time.getExecutionTime();
+                maxMySQLMyISAM = stats[12].Time.getExecutionTime();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            SQLStatistic mins              = stats[0],
+                         maxs              = stats[0],
+                         mindexNoSQL       = mins,
+                         maxdexNoSQL       = maxs,
+                         mindexMSSQL       = stats[4],
+                         maxdexMSSQL       = stats[4],
                          mindexMySQLInnoDB = stats[8],
-                         maxdexMySQLInnoDB = stats[8];
+                         maxdexMySQLInnoDB = stats[8],
+                         mindexMySQLMyISAM = stats[12],
+                         maxdexMySQLMyISAM = stats[12];
 
-            double atlagMSSQL = 0, atlagNoSQL = 0, atlagMySQLInnoDB = 0;
+            double atlagMSSQL = 0, atlagNoSQL = 0, atlagMySQLInnoDB = 0, atlagMySQLMyISAM = 0;
             int count = 0;
 
             foreach(SQLStatistic s in stats)
@@ -163,6 +189,20 @@ namespace SQLTestApplication
                         maxdexMySQLInnoDB = s;
                     }
                 }
+                else if (s.getSQLType.Equals(Types.SQLType.MySQLMyISAM))
+                {
+                    atlagMySQLMyISAM += s.Time.getExecutionTime();
+                    if (minMSSQL > s.Time.getExecutionTime())
+                    {
+                        minMySQLMyISAM = s.Time.getExecutionTime();
+                        mindexMySQLMyISAM = s;
+                    }
+                    if (maxMSSQL < s.Time.getExecutionTime())
+                    {
+                        maxMySQLMyISAM = s.Time.getExecutionTime();
+                        maxdexMySQLMyISAM = s;
+                    }
+                }
             }
             #endregion
             #region Eredmények kiírása képernyőre
@@ -172,10 +212,13 @@ namespace SQLTestApplication
             Console.WriteLine("\nLeglassabb  MSSQL         függvény: " + maxdexMSSQL.ToString());
             Console.WriteLine("\nLeggyorsabb MySQL(InnoDB) függvény: " + mindexMySQLInnoDB.ToString());
             Console.WriteLine("\nLeglassabb  MySQL(InnoDB) függvény: " + maxdexMySQLInnoDB.ToString());
+            Console.WriteLine("\nLeggyorsabb MySQL(MyISAM) függvény: " + mindexMySQLMyISAM.ToString());
+            Console.WriteLine("\nLeglassabb  MySQL(MyISAM) függvény: " + maxdexMySQLMyISAM.ToString());
 
-            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.000000} sec", (atlagNoSQL / count));
-            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.000000} sec", (atlagMSSQL / count));
-            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.000000} sec", (atlagMySQLInnoDB / count));
+            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.00000000} sec", (atlagNoSQL / count));
+            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.00000000} sec", (atlagMSSQL / count));
+            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.00000000} sec", (atlagMySQLInnoDB / count));
+            Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.00000000} sec", (atlagMySQLMyISAM / count));
             Console.ReadLine();
             #endregion
         }
