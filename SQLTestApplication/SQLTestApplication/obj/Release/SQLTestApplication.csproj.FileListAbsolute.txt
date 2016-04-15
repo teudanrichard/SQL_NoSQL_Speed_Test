@@ -1,0 +1,12 @@
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\SQLTestApplication.exe.config
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\SQLTestApplication.exe
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\SQLTestApplication.pdb
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MongoDB.Bson.dll
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MongoDB.Driver.Core.dll
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MongoDB.Driver.dll
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MongoDB.Bson.xml
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MongoDB.Driver.xml
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Release\SQLTestApplication.csprojResolveAssemblyReference.cache
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Release\SQLTestApplication.exe
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Release\SQLTestApplication.pdb
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Release\MySql.Data.dll

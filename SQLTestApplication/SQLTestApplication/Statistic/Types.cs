@@ -10,7 +10,7 @@ namespace SQLTestApplication.Statistic
     {
         public enum SQLType
         {
-            SQL, NoSQL
+            MSSQL, NoSQL, MySQLInnoDB
         }
         public enum SQLActions
         {

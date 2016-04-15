@@ -11,7 +11,7 @@ using SQLTestApplication.Exceptions;
 
 namespace SQLTestApplication.SQLDatabase
 {
-    public class SQLTestClass
+    public class MSSQLTestClass
     {
         private static DataSet DataSetObject = new DataSet();
         private static string ConnectionString = ConfigurationManager.ConnectionStrings["mssql"].ConnectionString;
@@ -21,7 +21,7 @@ namespace SQLTestApplication.SQLDatabase
 
         public SQLStatistic selectAllRows()
         {
-            SQLStatistic stat = new SQLStatistic("MSSQL Read", Types.SQLActions.Olvasás, Types.SQLType.SQL);
+            SQLStatistic stat = new SQLStatistic("MSSQL Read", Types.SQLActions.Olvasás, Types.SQLType.MSSQL);
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
@@ -52,7 +52,7 @@ namespace SQLTestApplication.SQLDatabase
 
         public SQLStatistic insertRows(int rows)
         {
-            SQLStatistic stat = new SQLStatistic("MSSQL Insert", Types.SQLActions.Beszúrás, Types.SQLType.SQL);
+            SQLStatistic stat = new SQLStatistic("MSSQL Insert", Types.SQLActions.Beszúrás, Types.SQLType.MSSQL);
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
@@ -82,7 +82,7 @@ namespace SQLTestApplication.SQLDatabase
 
         public SQLStatistic deleteAllRows()
         {
-            SQLStatistic stat = new SQLStatistic("MSSQL Delete", Types.SQLActions.Törlés, Types.SQLType.SQL);
+            SQLStatistic stat = new SQLStatistic("MSSQL Delete", Types.SQLActions.Törlés, Types.SQLType.MSSQL);
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
@@ -107,7 +107,7 @@ namespace SQLTestApplication.SQLDatabase
 
         public SQLStatistic updateRows(int rows)
         {
-            SQLStatistic stat = new SQLStatistic("MSSQL Update", Types.SQLActions.Frissítés, Types.SQLType.SQL);
+            SQLStatistic stat = new SQLStatistic("MSSQL Update", Types.SQLActions.Frissítés, Types.SQLType.MSSQL);
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
