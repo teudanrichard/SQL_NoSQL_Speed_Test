@@ -1,0 +1,14 @@
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\SQLTestApplication.exe.config
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\SQLTestApplication.exe
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\SQLTestApplication.pdb
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Bson.dll
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Driver.Core.dll
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Driver.dll
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Bson.xml
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Driver.xml
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.csprojResolveAssemblyReference.cache
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.exe
+I:\SourceTree\Visual Studio Projects\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.pdb
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Debug\SQLTestApplication.exe.config
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.exe
+I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.pdb
