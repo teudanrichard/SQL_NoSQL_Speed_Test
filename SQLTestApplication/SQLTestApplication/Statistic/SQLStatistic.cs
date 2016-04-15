@@ -18,17 +18,12 @@ namespace SQLTestApplication.Statistic
         internal ExecutionTime Time
         {
             get
-            {
-                return time;
-            }
+            { return time; }
         }
 
         public Types.SQLType getSQLType
         {
-            get {
-                return type; 
-                }
-
+            get { return type; }
         }
 
         public SQLStatistic(string testName, Types.SQLActions actions, Types.SQLType type)

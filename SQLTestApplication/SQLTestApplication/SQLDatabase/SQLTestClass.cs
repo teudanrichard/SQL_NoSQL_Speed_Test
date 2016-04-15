@@ -7,6 +7,7 @@ using SQLTestApplication.Statistic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using SQLTestApplication.Exceptions;
 
 namespace SQLTestApplication.SQLDatabase
 {
@@ -21,6 +22,7 @@ namespace SQLTestApplication.SQLDatabase
         public SQLStatistic selectAllRows()
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Read", Types.SQLActions.Olvasás, Types.SQLType.SQL);
+            try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
@@ -37,12 +39,18 @@ namespace SQLTestApplication.SQLDatabase
             SqlConnectionObject.Close();
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
+            }
+            catch (Exception ex)
+            {
+                throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) olvasása során\n" + ex.Message);
+            }
             return stat;
         }
 
         public SQLStatistic insertRows(int rows)
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Insert", Types.SQLActions.Beszúrás, Types.SQLType.SQL);
+            try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
@@ -57,12 +65,18 @@ namespace SQLTestApplication.SQLDatabase
             }
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
+            }
+            catch (Exception ex)
+            {
+                throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) beszúrása során\n" + ex.Message);
+            }
             return stat;
         }
 
         public SQLStatistic deleteAllRows()
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Delete", Types.SQLActions.Törlés, Types.SQLType.SQL);
+            try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
@@ -73,12 +87,18 @@ namespace SQLTestApplication.SQLDatabase
             SqlConnectionObject.Close();
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
+            }
+            catch (Exception ex)
+            {
+                throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) törlése során\n" + ex.Message);
+            }
             return stat;
         }
 
         public SQLStatistic updateRows(int rows)
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Update", Types.SQLActions.Frissítés, Types.SQLType.SQL);
+            try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
@@ -95,6 +115,11 @@ namespace SQLTestApplication.SQLDatabase
             }
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
+            }
+            catch (Exception ex)
+            {
+                throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) frissítése során\n" + ex.Message);
+            }
             return stat;
         }
 

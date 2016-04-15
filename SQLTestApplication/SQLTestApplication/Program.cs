@@ -46,15 +46,15 @@ namespace SQLTestApplication
             #region Adatok kiértékelése
             double minNoSQL = stats[0].Time.getExecutionTime(),
                    maxNoSQL = stats[0].Time.getExecutionTime(),
-                   minSQL = stats[4].Time.getExecutionTime(),
-                   maxSQL = stats[4].Time.getExecutionTime();
+                   minMSSQL = stats[4].Time.getExecutionTime(),
+                   maxMSSQL = stats[4].Time.getExecutionTime();
 
             SQLStatistic mindexNoSQL = stats[0],
                          maxdexNoSQL = stats[0],
-                         mindexSQL = stats[4],
-                         maxdexSQL = stats[4];
+                         mindexMSSQL = stats[4],
+                         maxdexMSSQL = stats[4];
 
-            double atlagSQL = 0, atlagNoSQL = 0;
+            double atlagMSSQL = 0, atlagNoSQL = 0;
             int count = 0;
 
             foreach(SQLStatistic s in stats)
@@ -66,7 +66,7 @@ namespace SQLTestApplication
                 }
                 else
                 {
-                    atlagSQL += s.Time.getExecutionTime();
+                    atlagMSSQL += s.Time.getExecutionTime();
                 }
 
                 if (s.getSQLType.Equals(Types.SQLType.NoSQL)) { 
@@ -84,16 +84,16 @@ namespace SQLTestApplication
                 }
                 else
                 {
-                    if (minSQL > s.Time.getExecutionTime())
+                    if (minMSSQL > s.Time.getExecutionTime())
                     {
-                        minSQL = s.Time.getExecutionTime();
-                        mindexSQL = s;
+                        minMSSQL = s.Time.getExecutionTime();
+                        mindexMSSQL = s;
                     }
 
-                    if (maxSQL < s.Time.getExecutionTime())
+                    if (maxMSSQL < s.Time.getExecutionTime())
                     {
-                        maxSQL = s.Time.getExecutionTime();
-                        maxdexSQL = s;
+                        maxMSSQL = s.Time.getExecutionTime();
+                        maxdexMSSQL = s;
                     }
                 }
             }
@@ -101,27 +101,27 @@ namespace SQLTestApplication
             #region Eredmények kiírása képernyőre
             Console.WriteLine("\nLeggyorsabb NoSQL függvény : " + mindexNoSQL.ToString());
             Console.WriteLine("\nLeglassabb  NoSQL függvény: " + maxdexNoSQL.ToString());
-            Console.WriteLine("\nLeggyorsabb MSSQL függvény : " + mindexSQL.ToString());
-            Console.WriteLine("\nLeglassabb  MSSQL függvény: " + maxdexSQL.ToString());
+            Console.WriteLine("\nLeggyorsabb MSSQL függvény : " + mindexMSSQL.ToString());
+            Console.WriteLine("\nLeglassabb  MSSQL függvény: " + maxdexMSSQL.ToString());
 
-            if(mindexNoSQL.Time.getExecutionTime() < mindexSQL.Time.getExecutionTime())
+            if(mindexNoSQL.Time.getExecutionTime() < mindexMSSQL.Time.getExecutionTime())
             {
                 Console.WriteLine("\nLeggyorsabb        függvény : " + mindexNoSQL.ToString());
             }
             else
             {
-                Console.WriteLine("\nLeggyorsabb        függvény : " + mindexSQL.ToString());
+                Console.WriteLine("\nLeggyorsabb        függvény : " + mindexMSSQL.ToString());
             }
-            if (maxdexNoSQL.Time.getExecutionTime() > maxdexSQL.Time.getExecutionTime())
+            if (maxdexNoSQL.Time.getExecutionTime() > maxdexMSSQL.Time.getExecutionTime())
             {
                 Console.WriteLine("\nLeglassabb        függvény : " + maxdexNoSQL.ToString());
             }
             else
             {
-                Console.WriteLine("\nLeglassabb        függvény : " + maxdexSQL.ToString());
+                Console.WriteLine("\nLeglassabb        függvény : " + maxdexMSSQL.ToString());
             }
             Console.WriteLine("\nÖsszes NoSQL függvény átlagos futásideje : {0:0.000000} sec", (atlagNoSQL / count));
-            Console.WriteLine("\nÖsszes MSSQL függvény átlagos futásideje : {0:0.000000} sec", (atlagSQL / count));
+            Console.WriteLine("\nÖsszes MSSQL függvény átlagos futásideje : {0:0.000000} sec", (atlagMSSQL / count));
             Console.ReadLine();
             #endregion
         }
