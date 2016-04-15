@@ -1,32 +1,28 @@
 ﻿using SQLTestApplication.Exceptions;
 using System;
+using System.Diagnostics;
 
 namespace SQLTestApplication.Statistic
 {
     internal class ExecutionTime
     {
-        private long start = -1;
-        private long end = -1;
+
+        Stopwatch stopwatch = new Stopwatch();
 
         public void Start()
         {
-           start = DateTime.Now.Ticks;
+           stopwatch.Start();
         }
+
         public void End()
         {
-            if(start == -1)
-            {
-                throw new MissingParameterException("Start idő nincs beállítva!");
-            }
-            end = DateTime.Now.Ticks;
+            stopwatch.Stop();
         }
+
+
         public double getExecutionTime()
-        {
-            if(end == -1)
-            {
-                throw new MissingParameterException("End idő nincs beállítva!"); 
-            }
-            return TimeSpan.FromTicks(end - start).TotalMilliseconds / 1000.0;
+        {           
+            return stopwatch.Elapsed.TotalMilliseconds / 1000;
         }
 
     }

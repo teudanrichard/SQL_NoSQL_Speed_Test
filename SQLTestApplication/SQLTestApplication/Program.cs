@@ -22,8 +22,6 @@ namespace SQLTestApplication
 
         static void Main(string[] args)
         {
-
-
             Console.WriteLine("Start test!");
 
             Console.WriteLine("Press any key!");
@@ -53,7 +51,7 @@ namespace SQLTestApplication
             #endregion
             #region Teszt ciklus
             //teszt kezdete
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 try { 
                     stats.Add(noSQL.insertRows(1));
                     stats.Add(noSQL.selectAllRows().Result);
@@ -101,32 +99,19 @@ namespace SQLTestApplication
             }
             #endregion
             #region Adatok kiértékelése
-            double mind = -1,
-                   maxd = 1,
-                   minNoSQL = -1,
-                   maxNoSQL = 1,
-                   minMSSQL = -1,
-                   maxMSSQL = 1,
-                   minMySQLInnoDB = -1,
-                   maxMySQLInnoDB = 1,
-                   minMySQLMyISAM = -1,
-                   maxMySQLMyISAM = 1;
 
-            try {
-                mind = stats[0].Time.getExecutionTime();
-                maxd           = stats[0].Time.getExecutionTime();
-                minNoSQL       = stats[0].Time.getExecutionTime();
-                maxNoSQL       = stats[0].Time.getExecutionTime();
-                minMSSQL       = stats[4].Time.getExecutionTime();
-                maxMSSQL       = stats[4].Time.getExecutionTime();
-                minMySQLInnoDB = stats[8].Time.getExecutionTime();
-                maxMySQLInnoDB = stats[8].Time.getExecutionTime();
-                minMySQLMyISAM = stats[12].Time.getExecutionTime();
-                maxMySQLMyISAM = stats[12].Time.getExecutionTime();
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
+            double     mind           = stats[0].Time.getExecutionTime(),
+                       maxd           = stats[0].Time.getExecutionTime(),
+                       minNoSQL       = stats[0].Time.getExecutionTime(),
+                       maxNoSQL       = stats[0].Time.getExecutionTime(),
+                       minMSSQL       = stats[4].Time.getExecutionTime(),
+                       maxMSSQL       = stats[4].Time.getExecutionTime(),
+                       minMySQLInnoDB = stats[8].Time.getExecutionTime(),
+                       maxMySQLInnoDB = stats[8].Time.getExecutionTime(),
+                       minMySQLMyISAM = stats[12].Time.getExecutionTime(),
+                       maxMySQLMyISAM = stats[12].Time.getExecutionTime();
+
 
             SQLStatistic mins              = stats[0],
                          maxs              = stats[0],
@@ -144,10 +129,9 @@ namespace SQLTestApplication
 
             foreach(SQLStatistic s in stats)
             {
-
-                count++;
                 if (s.getSQLType.Equals(Types.SQLType.NoSQL))
                 {
+                    count++;
                     atlagNoSQL += s.Time.getExecutionTime();
                     if (minNoSQL > s.Time.getExecutionTime())
                     {
@@ -215,10 +199,10 @@ namespace SQLTestApplication
             Console.WriteLine("\nLeggyorsabb MySQL(MyISAM) függvény: " + mindexMySQLMyISAM.ToString());
             Console.WriteLine("\nLeglassabb  MySQL(MyISAM) függvény: " + maxdexMySQLMyISAM.ToString());
 
-            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.00000000} sec", (atlagNoSQL / count));
-            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.00000000} sec", (atlagMSSQL / count));
-            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.00000000} sec", (atlagMySQLInnoDB / count));
-            Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.00000000} sec", (atlagMySQLMyISAM / count));
+            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.0000000} sec", (atlagNoSQL / count));
+            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.0000000} sec", (atlagMSSQL / count));
+            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.0000000} sec", (atlagMySQLInnoDB / count));
+            Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.0000000} sec", (atlagMySQLMyISAM / count));
             Console.ReadLine();
             #endregion
         }

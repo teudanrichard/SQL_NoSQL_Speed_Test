@@ -17,8 +17,7 @@ namespace SQLTestApplication.Statistic
 
         internal ExecutionTime Time
         {
-            get
-            { return time; }
+            get { return time; }
         }
 
         public Types.SQLType getSQLType
@@ -45,7 +44,8 @@ namespace SQLTestApplication.Statistic
                     {
                         str += (i+1)+". Adat\nID: "+datas[i].ID+"\nNeve: "+datas[i].Name+"\nKód: "+datas[i].NeptunCode+"\n";
                     }
-            str += "\n\tTeszt neve: " + testName + "\n\tMűvelet(ek): " + actions + " \n\tAdatbázis típusa: " + type + "\n\tFutásidő: " + Time.getExecutionTime() + " sec";
+
+            str += "\n\tTeszt neve: " + testName + "\n\tMűvelet(ek): " + actions + " \n\tAdatbázis típusa: " + type + "\n\tFutásidő: " + time.getExecutionTime() + " sec";
             return str;
         }
     }
