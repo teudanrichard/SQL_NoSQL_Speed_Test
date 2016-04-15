@@ -44,22 +44,22 @@ namespace SQLTestApplication
             #endregion
             #region Teszt ciklus
             //teszt kezdete
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < 10; i++) {
                 try { 
-                    stats.Add(noSQL.insertRows(1));
+                    stats.Add(noSQL.insertRows(50));
                     stats.Add(noSQL.selectAllRows().Result);
-                    stats.Add(noSQL.updateRows(1).Result);
-                    //stats.Add(noSQL.deleteAllRows());
+                    stats.Add(noSQL.updateRows(50).Result);
+                    stats.Add(noSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(msSQL.insertRows(1));
+                    stats.Add(msSQL.insertRows(50));
                     stats.Add(msSQL.selectAllRows());
-                    stats.Add(msSQL.updateRows(1));
+                    stats.Add(msSQL.updateRows(50));
                     stats.Add(msSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(mySQLInnoDB.insertRows(1));
+                    stats.Add(mySQLInnoDB.insertRows(50));
                     stats.Add(mySQLInnoDB.selectAllRows());
-                    stats.Add(mySQLInnoDB.updateRows(1));
-                    //stats.Add(mySQLInnoDB.deleteAllRows());
+                    stats.Add(mySQLInnoDB.updateRows(50));
+                    stats.Add(mySQLInnoDB.deleteAllRows());
                 }
                 catch(MSSQLException ex)
                 {
@@ -81,15 +81,19 @@ namespace SQLTestApplication
             }
             #endregion
             #region Adatok kiértékelése
-            double minNoSQL = stats[0].Time.getExecutionTime(),
+            double mind = stats[0].Time.getExecutionTime(),
+                   maxd = stats[0].Time.getExecutionTime(),
+                   minNoSQL = stats[0].Time.getExecutionTime(),
                    maxNoSQL = stats[0].Time.getExecutionTime(),
                    minMSSQL = stats[4].Time.getExecutionTime(),
                    maxMSSQL = stats[4].Time.getExecutionTime(),
                    minMySQLInnoDB = stats[8].Time.getExecutionTime(),
                    maxMySQLInnoDB = stats[8].Time.getExecutionTime();
 
-            SQLStatistic mindexNoSQL = stats[0],
-                         maxdexNoSQL = stats[0],
+            SQLStatistic mins = stats[0],
+                         maxs = stats[0],
+                         mindexNoSQL = mins,
+                         maxdexNoSQL = maxs,
                          mindexMSSQL = stats[4],
                          maxdexMSSQL = stats[4],
                          mindexMySQLInnoDB = stats[8],
@@ -100,27 +104,16 @@ namespace SQLTestApplication
 
             foreach(SQLStatistic s in stats)
             {
+
+                count++;
                 if (s.getSQLType.Equals(Types.SQLType.NoSQL))
                 {
                     atlagNoSQL += s.Time.getExecutionTime();
-                    count++;
-                }
-                else if(s.getSQLType.Equals(Types.SQLType.MSSQL))
-                {
-                    atlagMSSQL += s.Time.getExecutionTime();
-                }
-                else if(s.getSQLType.Equals(Types.SQLType.MySQLInnoDB))
-                {
-                    atlagMySQLInnoDB += s.Time.getExecutionTime();
-                }
-
-                if (s.getSQLType.Equals(Types.SQLType.NoSQL)) { 
-                    if(minNoSQL > s.Time.getExecutionTime())
+                    if (minNoSQL > s.Time.getExecutionTime())
                     {
                         minNoSQL = s.Time.getExecutionTime();
                         mindexNoSQL = s;
                     }
-
                     if (maxNoSQL < s.Time.getExecutionTime())
                     {
                         maxNoSQL = s.Time.getExecutionTime();
@@ -129,12 +122,13 @@ namespace SQLTestApplication
                 }
                 else if (s.getSQLType.Equals(Types.SQLType.MSSQL))
                 {
+
+                    atlagMSSQL += s.Time.getExecutionTime();
                     if (minMSSQL > s.Time.getExecutionTime())
                     {
                         minMSSQL = s.Time.getExecutionTime();
                         mindexMSSQL = s;
                     }
-
                     if (maxMSSQL < s.Time.getExecutionTime())
                     {
                         maxMSSQL = s.Time.getExecutionTime();
@@ -143,12 +137,12 @@ namespace SQLTestApplication
                 }
                 else if (s.getSQLType.Equals(Types.SQLType.MySQLInnoDB))
                 {
+                    atlagMySQLInnoDB += s.Time.getExecutionTime();
                     if (minMSSQL > s.Time.getExecutionTime())
                     {
                         minMySQLInnoDB = s.Time.getExecutionTime();
                         mindexMySQLInnoDB = s;
                     }
-
                     if (maxMSSQL < s.Time.getExecutionTime())
                     {
                         maxMySQLInnoDB = s.Time.getExecutionTime();
@@ -158,12 +152,12 @@ namespace SQLTestApplication
             }
             #endregion
             #region Eredmények kiírása képernyőre
-            Console.WriteLine("\nLeggyorsabb NoSQL         függvény : " + mindexNoSQL.ToString());
+            Console.WriteLine("\nLeggyorsabb NoSQL         függvény: " + mindexNoSQL.ToString());
             Console.WriteLine("\nLeglassabb  NoSQL         függvény: " + maxdexNoSQL.ToString());
-            Console.WriteLine("\nLeggyorsabb MSSQL         függvény : " + mindexMSSQL.ToString());
+            Console.WriteLine("\nLeggyorsabb MSSQL         függvény: " + mindexMSSQL.ToString());
             Console.WriteLine("\nLeglassabb  MSSQL         függvény: " + maxdexMSSQL.ToString());
-            Console.WriteLine("\nLeggyorsabb MySQL(InnoDB) függvény : " + mindexMSSQL.ToString());
-            Console.WriteLine("\nLeglassabb  MySQL(InnoDB) függvény: " + maxdexMSSQL.ToString());
+            Console.WriteLine("\nLeggyorsabb MySQL(InnoDB) függvény: " + mindexMySQLInnoDB.ToString());
+            Console.WriteLine("\nLeglassabb  MySQL(InnoDB) függvény: " + maxdexMySQLInnoDB.ToString());
 
             Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.000000} sec", (atlagNoSQL / count));
             Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.000000} sec", (atlagMSSQL / count));

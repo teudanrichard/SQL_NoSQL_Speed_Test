@@ -18,15 +18,15 @@ namespace SQLTestApplication.NoSQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MongoDB Delete", Types.SQLActions.Törlés, Types.SQLType.NoSQL);
             try { 
-            stat.Time.Start();
-            DataObject obj = new DataObject();
-            //------------------------------------------------------------------------------------------------------------
-            MongoClient client = new MongoClient();
-            var db = client.GetDatabase("Data");
-            var collection = db.GetCollection<DataObject>("TestDatabase");
-            collection.DeleteMany("{}");
-            //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+                stat.Time.Start();
+                DataObject obj = new DataObject();
+                //------------------------------------------------------------------------------------------------------------
+                MongoClient client = new MongoClient();
+                var db = client.GetDatabase("Data");
+                var collection = db.GetCollection<DataObject>("TestDatabase");
+                collection.DeleteMany("{}");
+                //------------------------------------------------------------------------------------------------------------
+                stat.Time.End();
             }catch(Exception ex)
             {
                 throw new NoSQLException("(NoSQL) Hiba történt az adat(ok) törlése során\n"+ex.Message);
