@@ -118,7 +118,7 @@ namespace SQLTestApplication.SQLDatabase
                 string query = "UPDATE test SET NeptunCode=@code WHERE Name=@name";
                 SqlDataAdapterObject.UpdateCommand = new SqlCommand(query, SqlConnectionObject);
                 SqlDataAdapterObject.UpdateCommand.Parameters.Add("@name", SqlDbType.VarChar, 30).Value = "testUser"+i;
-                SqlDataAdapterObject.UpdateCommand.Parameters.Add("@code", SqlDbType.VarChar, 30).Value = "HS8GZ9";
+                SqlDataAdapterObject.UpdateCommand.Parameters.Add("@code", SqlDbType.VarChar, 6).Value = "HS8GZ9";
 
                 SqlDataAdapterObject.UpdateCommand.ExecuteNonQuery();
 

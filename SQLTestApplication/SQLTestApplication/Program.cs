@@ -16,6 +16,8 @@ namespace SQLTestApplication
         static NoSQLDatabase.NoSQLTestClass noSQL = new NoSQLDatabase.NoSQLTestClass();
         static SQLDatabase.MSSQLTestClass msSQL = new SQLDatabase.MSSQLTestClass();
         static SQLDatabase.MySQLInnoDB mySQLInnoDB = new SQLDatabase.MySQLInnoDB();
+        static SQLDatabase.MySQLMyISAM mySQLMyISAM = new SQLDatabase.MySQLMyISAM();
+
         static List<SQLStatistic> stats = new List<SQLStatistic>();
 
         static void Main(string[] args)
@@ -31,13 +33,20 @@ namespace SQLTestApplication
             try { 
                 noSQL.deleteAllRows();
                 msSQL.deleteAllRows();
-            }catch(NoSQLException ex)
+                mySQLInnoDB.deleteAllRows();
+                msSQL.deleteAllRows();
+            }
+            catch(NoSQLException ex)
             {
                 Console.WriteLine(ex.Message);
             }catch (MSSQLException ex)
             {
                 Console.WriteLine(ex.Message);
             }catch(MySQLInnoDBException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (MySQLMyISAMDBException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -57,6 +66,11 @@ namespace SQLTestApplication
                     stats.Add(msSQL.deleteAllRows());
                     //----------------------------------------
                     stats.Add(mySQLInnoDB.insertRows(50));
+                    stats.Add(mySQLInnoDB.selectAllRows());
+                    stats.Add(mySQLInnoDB.updateRows(50));
+                    stats.Add(mySQLInnoDB.deleteAllRows());
+                    //----------------------------------------
+                    stats.Add(.insertRows(50));
                     stats.Add(mySQLInnoDB.selectAllRows());
                     stats.Add(mySQLInnoDB.updateRows(50));
                     stats.Add(mySQLInnoDB.deleteAllRows());
