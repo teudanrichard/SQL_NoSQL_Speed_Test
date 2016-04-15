@@ -25,10 +25,10 @@ namespace SQLTestApplication.SQLDatabase
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
+            SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
             SqlDataReader dataReader = null;
             string query = "SELECT * FROM test";
-            SqlConnectionObject.Open();
             SqlDataAdapterObject.SelectCommand = new SqlCommand(query, SqlConnectionObject);
             dataReader = SqlDataAdapterObject.SelectCommand.ExecuteReader();
             string result = "";
@@ -36,13 +36,16 @@ namespace SQLTestApplication.SQLDatabase
             {
                 result += dataReader["ID"]+","+dataReader["Name"]+","+ dataReader["NeptunCode"]+"\n";
             }
-            SqlConnectionObject.Close();
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
             }
             catch (Exception ex)
             {
                 throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) olvasása során\n" + ex.Message);
+            }
+            finally
+            {
+                SqlConnectionObject.Close();
             }
             return stat;
         }
@@ -53,15 +56,14 @@ namespace SQLTestApplication.SQLDatabase
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
+            SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
             for (int i=0;i< rows; i++) { 
                 string query = "INSERT INTO test(Name,NeptunCode) VALUES (@Name,@NeptunCode)";
                 SqlDataAdapterObject.InsertCommand = new SqlCommand(query, SqlConnectionObject);
                 SqlDataAdapterObject.InsertCommand.Parameters.Add("@Name", SqlDbType.VarChar, 30).Value = "testUser"+i;
                 SqlDataAdapterObject.InsertCommand.Parameters.Add("@NeptunCode", SqlDbType.VarChar, 30).Value = "B"+i;
-                SqlConnectionObject.Open();
                 SqlDataAdapterObject.InsertCommand.ExecuteNonQuery();
-                SqlConnectionObject.Close();
             }
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
@@ -69,6 +71,10 @@ namespace SQLTestApplication.SQLDatabase
             catch (Exception ex)
             {
                 throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) beszúrása során\n" + ex.Message);
+            }
+            finally
+            {
+                SqlConnectionObject.Close();
             }
             return stat;
         }
@@ -79,18 +85,21 @@ namespace SQLTestApplication.SQLDatabase
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
+            SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
             string query = "DELETE FROM test";
             SqlDataAdapterObject.DeleteCommand = new SqlCommand(query, SqlConnectionObject);
-            SqlConnectionObject.Open();
             SqlDataAdapterObject.DeleteCommand.ExecuteNonQuery();
-            SqlConnectionObject.Close();
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
             }
             catch (Exception ex)
             {
                 throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) törlése során\n" + ex.Message);
+            }
+            finally
+            {
+                SqlConnectionObject.Close();
             }
             return stat;
         }
@@ -101,6 +110,7 @@ namespace SQLTestApplication.SQLDatabase
             try { 
             stat.Time.Start();
             DataObject obj = new DataObject();
+            SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
             for (int i = 0; i < rows; i++)
             {
@@ -108,10 +118,10 @@ namespace SQLTestApplication.SQLDatabase
                 SqlDataAdapterObject.UpdateCommand = new SqlCommand(query, SqlConnectionObject);
                 SqlDataAdapterObject.UpdateCommand.Parameters.Add("@name", SqlDbType.VarChar, 30).Value = "testUser"+i;
                 SqlDataAdapterObject.UpdateCommand.Parameters.Add("@code", SqlDbType.VarChar, 30).Value = "HS8GZ9";
-                SqlConnectionObject.Open();
+
                 SqlDataAdapterObject.UpdateCommand.ExecuteNonQuery();
 
-                SqlConnectionObject.Close();
+ 
             }
             //------------------------------------------------------------------------------------------------------------
             stat.Time.End();
@@ -119,6 +129,10 @@ namespace SQLTestApplication.SQLDatabase
             catch (Exception ex)
             {
                 throw new MSSQLException("(MSSQL) Hiba történt az adat(ok) frissítése során\n" + ex.Message);
+            }
+            finally
+            {
+                SqlConnectionObject.Close();
             }
             return stat;
         }
