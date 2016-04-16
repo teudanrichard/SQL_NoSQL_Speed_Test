@@ -71,6 +71,7 @@
     <Compile Include="SQLDatabase\MSSQLTestClass.cs" />
     <Compile Include="SQLDatabase\MySQLInnoDB.cs" />
     <Compile Include="SQLDatabase\MySQLMyISAM.cs" />
+    <Compile Include="Statistic\DatabaseStatisticObject.cs" />
     <Compile Include="Statistic\DataObject.cs" />
     <Compile Include="Statistic\Types.cs" />
     <Compile Include="Statistic\ExecutionTime.cs" />

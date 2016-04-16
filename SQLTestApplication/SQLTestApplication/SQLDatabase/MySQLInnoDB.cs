@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SQLTestApplication.SQLDatabase
 {
-    public class MySQLInnoDB
+    class MySQLInnoDB
     {
         private static DataSet DataSetObject = new DataSet();
         private static string ConnectionString = ConfigurationManager.ConnectionStrings["mysql"].ConnectionString;
@@ -24,7 +24,7 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Read", Types.SQLActions.Olvasás, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Time.Start();
+                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace SQLTestApplication.SQLDatabase
                     result += dataReader["ID"] + "," + dataReader["Name"] + "," + dataReader["NeptunCode"] + "\n";
                 }
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Insert", Types.SQLActions.Beszúrás, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Time.Start();
+                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace SQLTestApplication.SQLDatabase
                     SqlDataAdapterObject.InsertCommand.ExecuteNonQuery();
                 }
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Delete", Types.SQLActions.Törlés, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Time.Start();
+                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ namespace SQLTestApplication.SQLDatabase
                 SqlDataAdapterObject.DeleteCommand = new MySqlCommand(query, SqlConnectionObject);
                 SqlDataAdapterObject.DeleteCommand.ExecuteNonQuery();
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }
             catch (Exception ex)
             {
@@ -115,7 +115,7 @@ namespace SQLTestApplication.SQLDatabase
 
             try
             {
-                stat.Time.Start();
+                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ namespace SQLTestApplication.SQLDatabase
 
                 }
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }
             catch (Exception ex)
             {

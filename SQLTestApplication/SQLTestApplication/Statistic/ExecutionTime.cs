@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SQLTestApplication.Statistic
 {
-    internal class ExecutionTime
+     class ExecutionTime
     {
 
         Stopwatch stopwatch = new Stopwatch();

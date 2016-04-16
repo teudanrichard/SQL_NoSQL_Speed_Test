@@ -18,7 +18,7 @@ namespace SQLTestApplication.NoSQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MongoDB Delete", Types.SQLActions.Törlés, Types.SQLType.NoSQL);
             try { 
-                stat.Time.Start();
+                stat.Start();
                 DataObject obj = new DataObject();
                 //------------------------------------------------------------------------------------------------------------
                 MongoClient client = new MongoClient();
@@ -26,7 +26,7 @@ namespace SQLTestApplication.NoSQLDatabase
                 var collection = db.GetCollection<DataObject>("TestDatabase");
                 collection.DeleteMany("{}");
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }catch(Exception ex)
             {
                 throw new NoSQLException("(NoSQL) Hiba történt az adat(ok) törlése során\n"+ex.Message);
@@ -38,7 +38,7 @@ namespace SQLTestApplication.NoSQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MongoDB Insert", Types.SQLActions.Beszúrás, Types.SQLType.NoSQL);
             try {
-                stat.Time.Start();
+                stat.Start();
                 //------------------------------------------------------------------------------------------------------------
                 MongoClient client = new MongoClient();
                 var db = client.GetDatabase("Data");
@@ -53,7 +53,7 @@ namespace SQLTestApplication.NoSQLDatabase
                     //stat.addDataObject(test);
                 }
                 //------------------------------------------------------------------------------------------------------------
-                stat.Time.End();
+                stat.End();
             }catch(Exception ex)
             {
                 throw new NoSQLException("(NoSQL) Hiba történt az adat(ok) beszúrása során\n"+ex.Message);
@@ -65,7 +65,7 @@ namespace SQLTestApplication.NoSQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MongoDB Read", Types.SQLActions.Olvasás, Types.SQLType.NoSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
             MongoClient client = new MongoClient();
@@ -85,7 +85,7 @@ namespace SQLTestApplication.NoSQLDatabase
                 }
             }
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }
             catch (Exception ex)
             {
@@ -98,7 +98,7 @@ namespace SQLTestApplication.NoSQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MongoDB Update", Types.SQLActions.Frissítés, Types.SQLType.NoSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             //------------------------------------------------------------------------------------------------------------
             MongoClient client = new MongoClient();
@@ -111,7 +111,7 @@ namespace SQLTestApplication.NoSQLDatabase
                 var result = await collection.UpdateOneAsync(filter, update);
             }
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }catch (Exception ex)
             {
                 throw new NoSQLException("(NoSQL) Hiba történt az adat(ok) frissítése során\n" + ex.Message);

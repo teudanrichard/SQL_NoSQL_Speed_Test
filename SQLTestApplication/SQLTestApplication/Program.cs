@@ -100,31 +100,11 @@ namespace SQLTestApplication
             #endregion
             #region Adatok kiértékelése
 
+            DatabaseStatisticObject NoSQL = new DatabaseStatisticObject(stats[0].getExecutionTime(), stats[0].getExecutionTime(),stats[0],stats[0]);
+            DatabaseStatisticObject MSSQL = new DatabaseStatisticObject(stats[4].getExecutionTime(), stats[4].getExecutionTime(), stats[4], stats[4]);
+            DatabaseStatisticObject MySQLInnoDB = new DatabaseStatisticObject(stats[8].getExecutionTime(), stats[8].getExecutionTime(), stats[8], stats[8]);
+            DatabaseStatisticObject MySQLMyISAM = new DatabaseStatisticObject(stats[12].getExecutionTime(), stats[12].getExecutionTime(), stats[12], stats[12]);
 
-            double     mind           = stats[0].Time.getExecutionTime(),
-                       maxd           = stats[0].Time.getExecutionTime(),
-                       minNoSQL       = stats[0].Time.getExecutionTime(),
-                       maxNoSQL       = stats[0].Time.getExecutionTime(),
-                       minMSSQL       = stats[4].Time.getExecutionTime(),
-                       maxMSSQL       = stats[4].Time.getExecutionTime(),
-                       minMySQLInnoDB = stats[8].Time.getExecutionTime(),
-                       maxMySQLInnoDB = stats[8].Time.getExecutionTime(),
-                       minMySQLMyISAM = stats[12].Time.getExecutionTime(),
-                       maxMySQLMyISAM = stats[12].Time.getExecutionTime();
-
-
-            SQLStatistic mins              = stats[0],
-                         maxs              = stats[0],
-                         mindexNoSQL       = mins,
-                         maxdexNoSQL       = maxs,
-                         mindexMSSQL       = stats[4],
-                         maxdexMSSQL       = stats[4],
-                         mindexMySQLInnoDB = stats[8],
-                         maxdexMySQLInnoDB = stats[8],
-                         mindexMySQLMyISAM = stats[12],
-                         maxdexMySQLMyISAM = stats[12];
-
-            double atlagMSSQL = 0, atlagNoSQL = 0, atlagMySQLInnoDB = 0, atlagMySQLMyISAM = 0;
             int count = 0;
 
             foreach(SQLStatistic s in stats)
@@ -132,77 +112,77 @@ namespace SQLTestApplication
                 if (s.getSQLType.Equals(Types.SQLType.NoSQL))
                 {
                     count++;
-                    atlagNoSQL += s.Time.getExecutionTime();
-                    if (minNoSQL > s.Time.getExecutionTime())
+                    NoSQL.AtlagMethod += s.getExecutionTime();
+                    if (NoSQL.MinMethod > s.getExecutionTime())
                     {
-                        minNoSQL = s.Time.getExecutionTime();
-                        mindexNoSQL = s;
+                        NoSQL.MinMethod = s.getExecutionTime();
+                        NoSQL.MinStatisticMethod = s;
                     }
-                    if (maxNoSQL < s.Time.getExecutionTime())
+                    if (NoSQL.MaxMethod < s.getExecutionTime())
                     {
-                        maxNoSQL = s.Time.getExecutionTime();
-                        maxdexNoSQL = s;
+                        NoSQL.MaxMethod = s.getExecutionTime();
+                        NoSQL.MaxStatisticMethod = s;
                     }
                 }
                 else if (s.getSQLType.Equals(Types.SQLType.MSSQL))
                 {
 
-                    atlagMSSQL += s.Time.getExecutionTime();
-                    if (minMSSQL > s.Time.getExecutionTime())
+                    MSSQL.AtlagMethod += s.getExecutionTime();
+                    if (MSSQL.MinMethod > s.getExecutionTime())
                     {
-                        minMSSQL = s.Time.getExecutionTime();
-                        mindexMSSQL = s;
+                        MSSQL.MinMethod = s.getExecutionTime();
+                        MSSQL.MinStatisticMethod = s;
                     }
-                    if (maxMSSQL < s.Time.getExecutionTime())
+                    if (MSSQL.MaxMethod < s.getExecutionTime())
                     {
-                        maxMSSQL = s.Time.getExecutionTime();
-                        maxdexMSSQL = s;
+                        MSSQL.MaxMethod = s.getExecutionTime();
+                        MSSQL.MaxStatisticMethod = s;
                     }
                 }
                 else if (s.getSQLType.Equals(Types.SQLType.MySQLInnoDB))
                 {
-                    atlagMySQLInnoDB += s.Time.getExecutionTime();
-                    if (minMSSQL > s.Time.getExecutionTime())
+                    MySQLInnoDB.AtlagMethod += s.getExecutionTime();
+                    if (MySQLInnoDB.MinMethod > s.getExecutionTime())
                     {
-                        minMySQLInnoDB = s.Time.getExecutionTime();
-                        mindexMySQLInnoDB = s;
+                        MySQLInnoDB.MinMethod = s.getExecutionTime();
+                        MySQLInnoDB.MinStatisticMethod = s;
                     }
-                    if (maxMSSQL < s.Time.getExecutionTime())
+                    if (MySQLInnoDB.MaxMethod < s.getExecutionTime())
                     {
-                        maxMySQLInnoDB = s.Time.getExecutionTime();
-                        maxdexMySQLInnoDB = s;
+                        MySQLInnoDB.MaxMethod = s.getExecutionTime();
+                        MySQLInnoDB.MaxStatisticMethod = s;
                     }
                 }
                 else if (s.getSQLType.Equals(Types.SQLType.MySQLMyISAM))
                 {
-                    atlagMySQLMyISAM += s.Time.getExecutionTime();
-                    if (minMSSQL > s.Time.getExecutionTime())
+                    MySQLMyISAM.AtlagMethod += s.getExecutionTime();
+                    if (MySQLMyISAM.MinMethod > s.getExecutionTime())
                     {
-                        minMySQLMyISAM = s.Time.getExecutionTime();
-                        mindexMySQLMyISAM = s;
+                        MySQLMyISAM.MinMethod = s.getExecutionTime();
+                        MySQLMyISAM.MinStatisticMethod = s;
                     }
-                    if (maxMSSQL < s.Time.getExecutionTime())
+                    if (MySQLMyISAM.MaxMethod < s.getExecutionTime())
                     {
-                        maxMySQLMyISAM = s.Time.getExecutionTime();
-                        maxdexMySQLMyISAM = s;
+                        MySQLMyISAM.MaxMethod = s.getExecutionTime();
+                        MySQLMyISAM.MaxStatisticMethod = s;
                     }
                 }
             }
             #endregion
             #region Eredmények kiírása képernyőre
-            Console.WriteLine("\nLeggyorsabb NoSQL         függvény: " + mindexNoSQL.ToString());
-            Console.WriteLine("\nLeglassabb  NoSQL         függvény: " + maxdexNoSQL.ToString());
-            Console.WriteLine("\nLeggyorsabb MSSQL         függvény: " + mindexMSSQL.ToString());
-            Console.WriteLine("\nLeglassabb  MSSQL         függvény: " + maxdexMSSQL.ToString());
-            Console.WriteLine("\nLeggyorsabb MySQL(InnoDB) függvény: " + mindexMySQLInnoDB.ToString());
-            Console.WriteLine("\nLeglassabb  MySQL(InnoDB) függvény: " + maxdexMySQLInnoDB.ToString());
-            Console.WriteLine("\nLeggyorsabb MySQL(MyISAM) függvény: " + mindexMySQLMyISAM.ToString());
-            Console.WriteLine("\nLeglassabb  MySQL(MyISAM) függvény: " + maxdexMySQLMyISAM.ToString());
+            Console.WriteLine("\nLeggyorsabb NoSQL         függvény: " + NoSQL.MinStatisticMethod.ToString());
+            Console.WriteLine("\nLeglassabb  NoSQL         függvény: " + NoSQL.MaxStatisticMethod.ToString());
+            Console.WriteLine("\nLeggyorsabb MSSQL         függvény: " + MSSQL.MinStatisticMethod.ToString());
+            Console.WriteLine("\nLeglassabb  MSSQL         függvény: " + MSSQL.MaxStatisticMethod.ToString());
+            Console.WriteLine("\nLeggyorsabb MySQL(InnoDB) függvény: " + MySQLInnoDB.MinStatisticMethod.ToString());
+            Console.WriteLine("\nLeglassabb  MySQL(InnoDB) függvény: " + MySQLInnoDB.MaxStatisticMethod.ToString());
+            Console.WriteLine("\nLeggyorsabb MySQL(MyISAM) függvény: " + MySQLMyISAM.MinStatisticMethod.ToString());
+            Console.WriteLine("\nLeglassabb  MySQL(MyISAM) függvény: " + MySQLMyISAM.MaxStatisticMethod.ToString());
 
-            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.0000000} sec", (atlagNoSQL / count));
-            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.0000000} sec", (atlagMSSQL / count));
-            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.0000000} sec", (atlagMySQLInnoDB / count));
-            Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.0000000} sec", (atlagMySQLMyISAM / count));
+            Console.WriteLine("\nÖsszes NoSQL         függvény átlagos futásideje : {0:0.0000000} sec", (NoSQL.AtlagMethod / count));
+            Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.0000000} sec", (MSSQL.AtlagMethod / count));
+            Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLInnoDB.AtlagMethod / count));
+            Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLMyISAM.AtlagMethod / count));
             Console.ReadLine();
             #endregion
         }

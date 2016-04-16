@@ -11,7 +11,7 @@ using SQLTestApplication.Exceptions;
 
 namespace SQLTestApplication.SQLDatabase
 {
-    public class MSSQLTestClass
+    class MSSQLTestClass
     {
         private static DataSet DataSetObject = new DataSet();
         private static string ConnectionString = ConfigurationManager.ConnectionStrings["mssql"].ConnectionString;
@@ -23,7 +23,7 @@ namespace SQLTestApplication.SQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Read", Types.SQLActions.Olvasás, Types.SQLType.MSSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ namespace SQLTestApplication.SQLDatabase
                 result += dataReader["ID"]+","+dataReader["Name"]+","+ dataReader["NeptunCode"]+"\n";
             }
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace SQLTestApplication.SQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Insert", Types.SQLActions.Beszúrás, Types.SQLType.MSSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ namespace SQLTestApplication.SQLDatabase
                 SqlDataAdapterObject.InsertCommand.ExecuteNonQuery();
             }
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace SQLTestApplication.SQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Delete", Types.SQLActions.Törlés, Types.SQLType.MSSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ namespace SQLTestApplication.SQLDatabase
             SqlDataAdapterObject.DeleteCommand = new SqlCommand(query, SqlConnectionObject);
             SqlDataAdapterObject.DeleteCommand.ExecuteNonQuery();
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace SQLTestApplication.SQLDatabase
         {
             SQLStatistic stat = new SQLStatistic("MSSQL Update", Types.SQLActions.Frissítés, Types.SQLType.MSSQL);
             try { 
-            stat.Time.Start();
+            stat.Start();
             DataObject obj = new DataObject();
             SqlConnectionObject.Open();
             //------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ namespace SQLTestApplication.SQLDatabase
  
             }
             //------------------------------------------------------------------------------------------------------------
-            stat.Time.End();
+            stat.End();
             }
             catch (Exception ex)
             {
