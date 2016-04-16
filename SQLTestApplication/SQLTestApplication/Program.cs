@@ -51,7 +51,7 @@ namespace SQLTestApplication
             #endregion
             #region Teszt ciklus
             //teszt kezdete
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 100; i++) {
                 try { 
                     stats.Add(noSQL.insertRows(1));
                     stats.Add(noSQL.selectAllRows().Result);
@@ -100,6 +100,7 @@ namespace SQLTestApplication
             #endregion
             #region Adatok kiértékelése
 
+            DatabaseStatisticObject SQL = new DatabaseStatisticObject(stats[0].getExecutionTime(), stats[0].getExecutionTime(), stats[0], stats[0]);
             DatabaseStatisticObject NoSQL = new DatabaseStatisticObject(stats[0].getExecutionTime(), stats[0].getExecutionTime(),stats[0],stats[0]);
             DatabaseStatisticObject MSSQL = new DatabaseStatisticObject(stats[4].getExecutionTime(), stats[4].getExecutionTime(), stats[4], stats[4]);
             DatabaseStatisticObject MySQLInnoDB = new DatabaseStatisticObject(stats[8].getExecutionTime(), stats[8].getExecutionTime(), stats[8], stats[8]);
@@ -167,6 +168,16 @@ namespace SQLTestApplication
                         MySQLMyISAM.MaxStatisticMethod = s;
                     }
                 }
+                if(SQL.MinMethod > s.getExecutionTime())
+                {
+                    SQL.MinMethod = s.getExecutionTime();
+                    SQL.MinStatisticMethod = s;
+                }
+                if(SQL.MaxMethod < s.getExecutionTime())
+                {
+                    SQL.MaxMethod = s.getExecutionTime();
+                    SQL.MaxStatisticMethod = s;
+                }
             }
             #endregion
             #region Eredmények kiírása képernyőre
@@ -183,6 +194,9 @@ namespace SQLTestApplication
             Console.WriteLine("\nÖsszes MSSQL         függvény átlagos futásideje : {0:0.0000000} sec", (MSSQL.AtlagMethod / count));
             Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLInnoDB.AtlagMethod / count));
             Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLMyISAM.AtlagMethod / count));
+
+            Console.WriteLine("\n\n\nA legyorsabb függvény : {0:0.0000000} sec", SQL.MinStatisticMethod.ToString());
+            Console.WriteLine("\nA leglassabb függvény : {0:0.0000000} sec", SQL.MaxStatisticMethod.ToString());
             Console.ReadLine();
             #endregion
         }
