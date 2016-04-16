@@ -195,8 +195,8 @@ namespace SQLTestApplication
             Console.WriteLine("\nÖsszes MySQL(InnoDB) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLInnoDB.AtlagMethod / count));
             Console.WriteLine("\nÖsszes MySQL(MyISAM) függvény átlagos futásideje : {0:0.0000000} sec", (MySQLMyISAM.AtlagMethod / count));
 
-            Console.WriteLine("\n\n\nA legyorsabb függvény : {0:0.0000000} sec", SQL.MinStatisticMethod.ToString());
-            Console.WriteLine("\nA leglassabb függvény : {0:0.0000000} sec", SQL.MaxStatisticMethod.ToString());
+            Console.WriteLine("\n\n\nA legyorsabb függvény : {0:0.0000000} ", SQL.MinStatisticMethod.ToString());
+            Console.WriteLine("\nA leglassabb függvény : {0:0.0000000} ", SQL.MaxStatisticMethod.ToString());
             Console.ReadLine();
             #endregion
         }
