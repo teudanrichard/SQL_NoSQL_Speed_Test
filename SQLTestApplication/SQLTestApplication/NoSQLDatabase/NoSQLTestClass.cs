@@ -76,13 +76,13 @@ namespace SQLTestApplication.NoSQLDatabase
             {
                 while (await cursor.MoveNextAsync())
                 {
-                    var batch = cursor.Current;
-                    foreach (var document in batch)
-                    {
-                        //Console.Write(document.ToString() + "\n");
-                        //count++;
+                        var batch = cursor.Current;
+                        foreach (var document in batch)
+                        {
+                            //Console.Write(document.ToString() + "\n");
+                            //count++;
+                        }
                     }
-                }
             }
             //------------------------------------------------------------------------------------------------------------
             stat.End();
