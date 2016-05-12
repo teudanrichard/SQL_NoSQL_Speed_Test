@@ -24,13 +24,13 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(MyISAM) Read", Types.SQLActions.Olvasás, Types.SQLType.MySQLMyISAM);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
                 MySqlDataReader dataReader = null;
                 string query = "SELECT * FROM testisam";
                 SqlDataAdapterObject.SelectCommand = new MySqlCommand(query, SqlConnectionObject);
+                stat.Start();
                 dataReader = SqlDataAdapterObject.SelectCommand.ExecuteReader();
                 string result = "";
                 while (dataReader.Read())
@@ -56,9 +56,9 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(MyISAM) Insert", Types.SQLActions.Beszúrás, Types.SQLType.MySQLMyISAM);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
+                stat.Start();
                 //------------------------------------------------------------------------------------------------------------
                 for (int i = 0; i < rows; i++)
                 {
@@ -88,12 +88,12 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(MyISAM) Delete", Types.SQLActions.Törlés, Types.SQLType.MySQLMyISAM);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
                 string query = "DELETE FROM testisam";
                 SqlDataAdapterObject.DeleteCommand = new MySqlCommand(query, SqlConnectionObject);
+                stat.Start();
                 SqlDataAdapterObject.DeleteCommand.ExecuteNonQuery();
                 //------------------------------------------------------------------------------------------------------------
                 stat.End();
@@ -115,13 +115,13 @@ namespace SQLTestApplication.SQLDatabase
 
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
+                string query = "UPDATE testisam SET NeptunCode=@code WHERE Name=@name";
+                stat.Start();
                 //------------------------------------------------------------------------------------------------------------
                 for (int i = 0; i < rows; i++)
                 {
-                    string query = "UPDATE testisam SET NeptunCode=@code WHERE Name=@name";
                     SqlDataAdapterObject.UpdateCommand = new MySqlCommand(query, SqlConnectionObject);
                     SqlDataAdapterObject.UpdateCommand.Parameters.Add("@name", MySqlDbType.VarChar, 30).Value = "testisamUser" + i;
                     SqlDataAdapterObject.UpdateCommand.Parameters.Add("@code", MySqlDbType.VarChar, 6).Value = "HS8GZ9";

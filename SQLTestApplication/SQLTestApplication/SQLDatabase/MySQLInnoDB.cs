@@ -24,15 +24,15 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Read", Types.SQLActions.Olvasás, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
                 MySqlDataReader dataReader = null;
                 string query = "SELECT * FROM test";
                 SqlDataAdapterObject.SelectCommand = new MySqlCommand(query, SqlConnectionObject);
-                dataReader = SqlDataAdapterObject.SelectCommand.ExecuteReader();
                 string result = "";
+                stat.Start();
+                dataReader = SqlDataAdapterObject.SelectCommand.ExecuteReader();
                 while (dataReader.Read())
                 {
                     result += dataReader["ID"] + "," + dataReader["Name"] + "," + dataReader["NeptunCode"] + "\n";
@@ -56,10 +56,11 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Insert", Types.SQLActions.Beszúrás, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
+
+                stat.Start();
                 for (int i = 0; i < rows; i++)
                 {
                     string query = "INSERT INTO test(ID,Name,NeptunCode) VALUES (@ID,@Name,@NeptunCode)";
@@ -88,12 +89,12 @@ namespace SQLTestApplication.SQLDatabase
             SQLStatistic stat = new SQLStatistic("MySQL(InnoDB) Delete", Types.SQLActions.Törlés, Types.SQLType.MySQLInnoDB);
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
                 //------------------------------------------------------------------------------------------------------------
                 string query = "DELETE FROM test";
                 SqlDataAdapterObject.DeleteCommand = new MySqlCommand(query, SqlConnectionObject);
+                stat.Start();
                 SqlDataAdapterObject.DeleteCommand.ExecuteNonQuery();
                 //------------------------------------------------------------------------------------------------------------
                 stat.End();
@@ -115,9 +116,9 @@ namespace SQLTestApplication.SQLDatabase
 
             try
             {
-                stat.Start();
                 DataObject obj = new DataObject();
                 SqlConnectionObject.Open();
+                stat.Start();
                 //------------------------------------------------------------------------------------------------------------
                 for (int i = 0; i < rows; i++)
                 {

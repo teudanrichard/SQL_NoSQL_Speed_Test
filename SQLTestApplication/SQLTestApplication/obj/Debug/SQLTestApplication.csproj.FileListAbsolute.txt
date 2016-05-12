@@ -32,3 +32,4 @@ I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Deb
 I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Debug\MongoDB.Driver.xml
 I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\obj\Debug\SQLTestApplication.csprojResolveAssemblyReference.cache
 I:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Debug\MySql.Data.dll
+D:\SourceTree\SQL_NoSQL_Speed_Test\SQLTestApplication\SQLTestApplication\bin\Debug\MySql.Data.dll

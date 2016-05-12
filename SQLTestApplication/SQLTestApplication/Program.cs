@@ -53,24 +53,24 @@ namespace SQLTestApplication
             //teszt kezdete
             for (int i = 0; i < 100; i++) {
                 try { 
-                    stats.Add(noSQL.insertRows(50));
+                    stats.Add(noSQL.insertRows(10));
                     stats.Add(noSQL.selectAllRows().Result);
-                    stats.Add(noSQL.updateRows(50).Result);
+                    stats.Add(noSQL.updateRows(10).Result);
                     stats.Add(noSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(msSQL.insertRows(50));
+                    stats.Add(msSQL.insertRows(10));
                     stats.Add(msSQL.selectAllRows());
-                    stats.Add(msSQL.updateRows(50));
+                    stats.Add(msSQL.updateRows(10));
                     stats.Add(msSQL.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(mySQLInnoDB.insertRows(50));
+                    stats.Add(mySQLInnoDB.insertRows(10));
                     stats.Add(mySQLInnoDB.selectAllRows());
-                    stats.Add(mySQLInnoDB.updateRows(50));
+                    stats.Add(mySQLInnoDB.updateRows(10));
                     stats.Add(mySQLInnoDB.deleteAllRows());
                     //----------------------------------------
-                    stats.Add(mySQLMyISAM.insertRows(50));
+                    stats.Add(mySQLMyISAM.insertRows(10));
                     stats.Add(mySQLMyISAM.selectAllRows());
-                    stats.Add(mySQLMyISAM.updateRows(50));
+                    stats.Add(mySQLMyISAM.updateRows(10));
                     stats.Add(mySQLMyISAM.deleteAllRows());
                 }
                 catch(MSSQLException ex)
