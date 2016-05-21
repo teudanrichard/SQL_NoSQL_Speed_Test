@@ -99,7 +99,6 @@ namespace SQLTestApplication
             }
             #endregion
             #region Adatok kiértékelése
-
             DatabaseStatisticObject SQL = new DatabaseStatisticObject(stats[0].getExecutionTime(), stats[0].getExecutionTime(), stats[0], stats[0]);
             DatabaseStatisticObject NoSQL = new DatabaseStatisticObject(stats[0].getExecutionTime(), stats[0].getExecutionTime(),stats[0],stats[0]);
             DatabaseStatisticObject MSSQL = new DatabaseStatisticObject(stats[4].getExecutionTime(), stats[4].getExecutionTime(), stats[4], stats[4]);

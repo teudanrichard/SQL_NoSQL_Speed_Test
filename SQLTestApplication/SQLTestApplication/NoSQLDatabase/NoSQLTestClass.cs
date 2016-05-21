@@ -46,13 +46,14 @@ namespace SQLTestApplication.NoSQLDatabase
                 var db = client.GetDatabase("Data");
                 var collection = db.GetCollection<DataObject>("TestDatabase");
                 DataObject test = new DataObject();
-
-                stat.Start();
+               
+               
                 for (int i = 0; i < rows; i++)
                 {
                     test.ID = i;
                     test.Name = "testUser" + i;
                     test.NeptunCode = "B" + i;
+                    stat.Start();
                     collection.InsertOneAsync(test);
                     //stat.addDataObject(test);
                 }
@@ -80,15 +81,15 @@ namespace SQLTestApplication.NoSQLDatabase
                 stat.Start();
                 using (var cursor = await collection.FindAsync(filter))
                 {
-                    while (await cursor.MoveNextAsync())
-                    {
-                        var batch = cursor.Current;
-                        //foreach (var document in batch)
-                        //{
-                        //    //Console.Write(document.ToString() + "\n");
-                        //    //count++;
-                        //}
-                    }
+                    //while (await cursor.MoveNextAsync())
+                    //{
+                    //    var batch = cursor.Current;
+                    //    //foreach (var document in batch)
+                    //    //{
+                    //    //    //Console.Write(document.ToString() + "\n");
+                    //    //    //count++;
+                    //    //}
+                    //}
                 }
                 //------------------------------------------------------------------------------------------------------------
                 stat.End();
